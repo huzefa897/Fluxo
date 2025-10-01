@@ -42,7 +42,7 @@ It allows users to manage products, track stock levels, and update quantities in
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/your-username/fluxo.git
+git clone https://github.com/huzefa897/fluxo.git
 cd fluxo
 
 ```
