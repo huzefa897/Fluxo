@@ -1,4 +1,4 @@
-// @Configuration
+package com.Inventory.Fluxo.Config;// @Configuration
 // @EnableWebMvc  // (usually not needed in Boot)
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

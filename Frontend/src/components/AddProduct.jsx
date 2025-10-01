@@ -3,63 +3,149 @@ import Header from './Header'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { newProduct } from '../services/productsServices';
-const AddProduct = () => {
-    const defaultProduct = {
-        id: '',
-        name: '',
-        description: '',
-        brand: '',
-        category: '',
-        quantity: '',
-        // lastAddDate: new Date().toISOString()
-    }
-    const [product, setProduct] = useState(defaultProduct)
-    const handleChange = (e) => {
-        console.log("value"+e.target.value);
-        console.log("name"+e.target.name);
-        const { name, value } = e.target;
-      
-        setProduct({
-          ...product,
-          [name]: name === "quantity" ? Number(value) : value
-        });
-      };
-   const handleSubmit = (e) => {
-  e.preventDefault();
+import Banner from './banner';
 
-  const payload = {
-    ...product,
-    lastAddDate: new Date().toISOString().split("T")[0]
+const AddProduct = () => {
+  const defaultProduct = {
+    sku: "",
+    name: "",
+    description: "",
+    brand: "",
+    category: "",
+    quantity: 0, 
+  };
+  const [hidden, setHidden] = useState(true);
+  const [banner, setBanner] = useState(false);
+  const [bannerMessage, setBannerMessage] = useState("");
+  const [bannerType, setBannerType] = useState("success");
+
+  const [product, setProduct] = useState(defaultProduct);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setProduct((p) => ({
+      ...p,
+      [name]: name === "quantity" ? Number(value || 0) : value
+    }));
   };
 
-  newProduct(payload)
-    .then((response) => {
-      console.log("✅ Product added:", response.data);
-      setProduct(defaultProduct); // reset form
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const payload = {
+      ...product,
+      lastAddDate: new Date().toISOString().split("T")[0],
+    };
+
+    console.log("SUBMIT payload ->", JSON.stringify(payload, null, 2));
+
+    try {
+      const res = await newProduct(payload);
+      console.log("✅ Product added:", res.data);
+      setProduct(defaultProduct); 
+      setBanner(true);
+      setBannerMessage("Product added successfully");
+      setBannerType("success");
+      setTimeout(() => {
+        setBanner(false);
+      }, 3000);
+    } catch (err) {
+      console.error("❌ Error adding product:", err);
+      setBanner(true);
+      setBannerMessage("Product addition failed");
+      setBannerType("error");
+      setTimeout(() => {
+        setBanner(false);
+      }, 3000);
+    }
+  };
+
+  return (
+    <>
+      <Header/>
+      {banner && <Banner message={bannerMessage} type={bannerType} />}
+      <form onSubmit={handleSubmit} className='flex flex-col gap-3 max-w-md mx-auto pt-10'>
+        <label>Product Id/Barcode</label>
+        <TextField
+          name="sku"
+          label="Id/Barcode"
+          variant="outlined"
+          size="small"
+          value={product.sku}
+          onChange={handleChange}
+        />
+
+        <label>Product Name</label>
+        <TextField
+          name="name"
+          label="Name"
+          variant="outlined"
+          size="small"
+          value={product.name}
+          onChange={handleChange}
+        />
+
+        <label>Description</label>
+        <TextField
+          name="description"
+          label="Description"
+          variant="outlined"
+          size="small"
+          value={product.description}
+          onChange={handleChange}
+        />
+
+        <label>Brand</label>
+        <TextField
+          name="brand"
+          label="Brand"
+          variant="outlined"
+          size="small"
+          value={product.brand}
+          onChange={handleChange}
+        />
+
+        <label>Category</label>
+        <TextField
+          name="category"
+          label="Category"
+          variant="outlined"
+          size="small"
+          value={product.category}
+          onChange={handleChange}
+        />
+
+        <label>Quantity</label>
+        <TextField
+          name="quantity"
+          label="Quantity"
+          type="number"
+          variant="outlined"
+          size="small"
+          value={product.quantity}
+          onChange={handleChange}
+        />
+        <Button hidden={hidden}
+  onClick={() =>
+    setProduct({
+      sku: "DEV"+Math.floor(Math.random() * 1000000),
+      name: "Test Product",
+      description: "This is just a test",
+      brand: "Test Brand",
+      category: "Testing",
+      quantity: "10",
     })
-    .catch((error) => {
-      console.error("❌ Error adding product:", error);
-    });
+  }
+>
+  Prefill Test Data
+</Button>
+
+        <Button type="submit" disabled={product.sku === "" || product.name === "" || product.description === "" || product.brand === "" || product.category === "" || product.quantity === ""} variant="contained" className='bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded'>
+          Add Product
+        </Button>
+      </form>
+    </>
+  );
 };
 
-  
-    return (
-    <>
-    <Header/>
-
-    <div className='flex flex-col gap-3 max-w-md mx-auto pt-10'>
-
-       <p1>Product Id/Barcode</p1> <TextField onChange={handleChange} name="id" id="outlined-basic" label="Id/Barcode" variant="outlined" size="small" />
-       <p1>Product Name</p1> <TextField onChange={handleChange} name="name" id="outlined-basic" label="Name" variant="outlined" size="small" />
-       <p1>Description</p1> <TextField onChange={handleChange} name="description" id="outlined-basic" label="Description" variant="outlined" size="small" />
-       <p1>Brand</p1> <TextField onChange={handleChange} name="brand" id="outlined-basic" label="Brand" variant="outlined" size="small" />
-       <p1>Category</p1> <TextField onChange={handleChange} name="category" id="outlined-basic" label="Category" variant="outlined" size="small" />
-       <p1>Quantity</p1> <TextField onChange={handleChange} name="quantity" id="outlined-basic" label="Quantity" variant="outlined" size="small" />
-       {/* <p1>Last Added Date</p1> <TextField id="outlined-basic" label="Last Added Date" variant="outlined" size="small" /> */}
-       <Button variant="contained" onClick={handleSubmit}className='bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded'>Add Product</Button>
-    </div>
-    </>
-  )
-}
-
-export default AddProduct
+export default AddProduct;

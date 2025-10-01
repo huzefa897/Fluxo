@@ -1,0 +1,253 @@
+2025-10-01 14:02:38.479 AEST [16726] LOG:  starting PostgreSQL 18.0 (Postgres.app) on aarch64-apple-darwin23.6.0, compiled by Apple clang version 15.0.0 (clang-1500.3.9.4), 64-bit
+2025-10-01 14:02:38.480 AEST [16726] LOG:  listening on IPv6 address "::1", port 5432
+2025-10-01 14:02:38.480 AEST [16726] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2025-10-01 14:02:38.481 AEST [16726] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2025-10-01 14:02:38.483 AEST [16732] LOG:  database system was shut down at 2025-10-01 14:02:38 AEST
+2025-10-01 14:02:38.484 AEST [16726] LOG:  database system is ready to accept connections
+2025-10-01 14:07:38.483 AEST [16730] LOG:  checkpoint starting: time
+2025-10-01 14:09:20.541 AEST [16730] LOG:  checkpoint complete: wrote 1007 buffers (6.1%), wrote 3 SLRU buffers; 1 WAL file(s) added, 0 removed, 0 recycled; write=102.006 s, sync=0.010 s, total=102.059 s; sync files=319, longest=0.002 s, average=0.001 s; distance=4772 kB, estimate=4772 kB; lsn=0/1C302A8, redo lsn=0/1C30218
+2025-10-01 14:17:32.184 AEST [19264] ERROR:  new locale provider (libc) does not match locale provider of the template database (icu)
+2025-10-01 14:17:32.184 AEST [19264] HINT:  Use the same locale provider as in the template database, or use template0 as template.
+2025-10-01 14:17:32.184 AEST [19264] STATEMENT:  CREATE DATABASE "Inventory"
+	    WITH
+	    OWNER = postgres
+	    ENCODING = 'UTF8'
+	    LOCALE_PROVIDER = 'libc'
+	    CONNECTION LIMIT = -1
+	    IS_TEMPLATE = False;
+	
+2025-10-01 14:17:38.540 AEST [16730] LOG:  checkpoint starting: time
+2025-10-01 14:17:38.653 AEST [16730] LOG:  checkpoint complete: wrote 1 buffers (0.0%), wrote 0 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.106 s, sync=0.002 s, total=0.115 s; sync files=1, longest=0.002 s, average=0.002 s; distance=0 kB, estimate=4295 kB; lsn=0/1C30518, redo lsn=0/1C304C0
+2025-10-01 14:17:57.967 AEST [19264] ERROR:  new locale provider (libc) does not match locale provider of the template database (icu)
+2025-10-01 14:17:57.967 AEST [19264] HINT:  Use the same locale provider as in the template database, or use template0 as template.
+2025-10-01 14:17:57.967 AEST [19264] STATEMENT:  CREATE DATABASE "Inventory"
+	    WITH
+	    OWNER = huzefa
+	    ENCODING = 'UTF8'
+	    LOCALE_PROVIDER = 'libc'
+	    CONNECTION LIMIT = -1
+	    IS_TEMPLATE = False;
+	
+2025-10-01 14:18:57.729 AEST [16726] LOG:  received SIGHUP, reloading configuration files
+2025-10-01 14:21:26.721 AEST [19264] ERROR:  new locale provider (libc) does not match locale provider of the template database (icu)
+2025-10-01 14:21:26.721 AEST [19264] HINT:  Use the same locale provider as in the template database, or use template0 as template.
+2025-10-01 14:21:26.721 AEST [19264] STATEMENT:  CREATE DATABASE "Inventory"
+	    WITH
+	    OWNER = postgres
+	    ENCODING = 'UTF8'
+	    LOCALE_PROVIDER = 'libc'
+	    CONNECTION LIMIT = -1
+	    IS_TEMPLATE = False;
+	
+2025-10-01 14:21:32.581 AEST [19264] ERROR:  new locale provider (libc) does not match locale provider of the template database (icu)
+2025-10-01 14:21:32.581 AEST [19264] HINT:  Use the same locale provider as in the template database, or use template0 as template.
+2025-10-01 14:21:32.581 AEST [19264] STATEMENT:  CREATE DATABASE "Inventory"
+	    WITH
+	    OWNER = huzefa
+	    ENCODING = 'UTF8'
+	    LOCALE_PROVIDER = 'libc'
+	    CONNECTION LIMIT = -1
+	    IS_TEMPLATE = False;
+	
+2025-10-01 14:21:48.283 AEST [19264] ERROR:  new locale provider (libc) does not match locale provider of the template database (icu)
+2025-10-01 14:21:48.283 AEST [19264] HINT:  Use the same locale provider as in the template database, or use template0 as template.
+2025-10-01 14:21:48.283 AEST [19264] STATEMENT:  CREATE DATABASE "Inventory"
+	    WITH
+	    OWNER = pg_database_owner
+	    ENCODING = 'UTF8'
+	    LOCALE_PROVIDER = 'libc'
+	    CONNECTION LIMIT = -1
+	    IS_TEMPLATE = False;
+	
+2025-10-01 14:21:55.875 AEST [19264] ERROR:  new locale provider (libc) does not match locale provider of the template database (icu)
+2025-10-01 14:21:55.875 AEST [19264] HINT:  Use the same locale provider as in the template database, or use template0 as template.
+2025-10-01 14:21:55.875 AEST [19264] STATEMENT:  CREATE DATABASE inventory
+	    WITH
+	    OWNER = huzefa
+	    ENCODING = 'UTF8'
+	    LOCALE_PROVIDER = 'libc'
+	    CONNECTION LIMIT = -1
+	    IS_TEMPLATE = False;
+	
+2025-10-01 14:22:36.089 AEST [19264] ERROR:  database "inventory" already exists
+2025-10-01 14:22:36.089 AEST [19264] STATEMENT:  CREATE DATABASE inventory
+	    WITH
+	    OWNER = huzefa
+	    TEMPLATE = template0
+	    ENCODING = 'UTF8'
+	    LOCALE_PROVIDER = 'libc'
+	    CONNECTION LIMIT = -1
+	    IS_TEMPLATE = False;
+	
+2025-10-01 14:22:38.746 AEST [16730] LOG:  checkpoint starting: time
+2025-10-01 14:24:16.392 AEST [16730] LOG:  checkpoint complete: wrote 964 buffers (5.9%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 1 recycled; write=97.611 s, sync=0.031 s, total=97.647 s; sync files=600, longest=0.001 s, average=0.001 s; distance=4441 kB, estimate=4441 kB; lsn=0/24DB8F8, redo lsn=0/2086B70
+2025-10-01 14:29:32.266 AEST [20691] FATAL:  role "InventoryManagement" does not exist
+2025-10-01 14:31:22.926 AEST [20978] FATAL:  role "InventoryManagement" does not exist
+2025-10-01 14:31:24.813 AEST [20980] FATAL:  role "InventoryManagement" does not exist
+2025-10-01 14:37:50.055 AEST [21190] FATAL:  role "InventoryManagement" does not exist
+2025-10-01 14:37:51.420 AEST [21196] FATAL:  role "InventoryManagement" does not exist
+2025-10-01 14:41:28.355 AEST [21364] FATAL:  role "InventoryManagement" does not exist
+2025-10-01 14:41:29.956 AEST [21367] FATAL:  role "InventoryManagement" does not exist
+2025-10-01 14:42:11.089 AEST [21435] LOG:  invalid length of startup packet
+2025-10-01 14:42:12.959 AEST [21436] LOG:  invalid length of startup packet
+2025-10-01 14:42:12.963 AEST [21448] LOG:  invalid length of startup packet
+2025-10-01 14:42:12.965 AEST [21449] LOG:  invalid length of startup packet
+2025-10-01 14:42:17.992 AEST [21474] LOG:  invalid length of startup packet
+2025-10-01 14:42:35.016 AEST [21475] LOG:  invalid length of startup packet
+2025-10-01 14:42:35.022 AEST [21484] LOG:  invalid length of startup packet
+2025-10-01 14:42:35.027 AEST [21485] LOG:  invalid length of startup packet
+2025-10-01 14:42:36.095 AEST [21487] LOG:  invalid length of startup packet
+2025-10-01 14:42:37.342 AEST [21488] LOG:  invalid length of startup packet
+2025-10-01 14:42:37.353 AEST [21490] LOG:  invalid length of startup packet
+2025-10-01 14:42:37.358 AEST [21491] LOG:  invalid length of startup packet
+2025-10-01 14:42:38.401 AEST [21493] LOG:  invalid length of startup packet
+2025-10-01 14:43:29.969 AEST [21522] FATAL:  role "InventoryManagement" does not exist
+2025-10-01 14:43:31.499 AEST [21525] FATAL:  role "InventoryManagement" does not exist
+2025-10-01 14:44:09.924 AEST [21578] LOG:  invalid length of startup packet
+2025-10-01 14:44:11.210 AEST [21579] LOG:  invalid length of startup packet
+2025-10-01 14:44:11.219 AEST [21581] LOG:  invalid length of startup packet
+2025-10-01 14:44:16.285 AEST [21582] LOG:  invalid length of startup packet
+2025-10-01 14:44:16.291 AEST [21586] LOG:  invalid length of startup packet
+2025-10-01 14:44:16.297 AEST [21587] LOG:  invalid length of startup packet
+2025-10-01 14:44:46.447 AEST [21654] LOG:  invalid length of startup packet
+2025-10-01 14:44:50.243 AEST [21661] FATAL:  role "Huzefa-Server" does not exist
+2025-10-01 14:44:51.834 AEST [21664] FATAL:  role "Huzefa-Server" does not exist
+2025-10-01 14:45:19.549 AEST [21700] FATAL:  role "InventoryManagement" does not exist
+2025-10-01 14:45:21.123 AEST [21704] FATAL:  role "InventoryManagement" does not exist
+2025-10-01 14:46:19.125 AEST [19463] ERROR:  syntax error at or near "\" at character 1
+2025-10-01 14:46:19.125 AEST [19463] STATEMENT:  \l
+2025-10-01 14:47:28.544 AEST [21800] ERROR:  syntax error at or near "\" at character 1
+2025-10-01 14:47:28.544 AEST [21800] STATEMENT:  \l
+2025-10-01 14:49:38.505 AEST [21800] ERROR:  syntax error at or near "table" at character 10
+2025-10-01 14:49:38.505 AEST [21800] STATEMENT:  select * table products
+2025-10-01 14:49:39.792 AEST [16730] LOG:  checkpoint starting: time
+2025-10-01 14:49:45.682 AEST [21800] ERROR:  syntax error at or near "Table" at character 10
+2025-10-01 14:49:45.682 AEST [21800] STATEMENT:  select * Table products
+2025-10-01 14:50:02.162 AEST [21800] ERROR:  relation "products" does not exist at character 15
+2025-10-01 14:50:02.162 AEST [21800] STATEMENT:  SELECT * FROM products;
+	
+2025-10-01 14:51:16.994 AEST [16730] LOG:  checkpoint complete: wrote 959 buffers (5.9%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=97.176 s, sync=0.006 s, total=97.203 s; sync files=258, longest=0.001 s, average=0.001 s; distance=4461 kB, estimate=4461 kB; lsn=0/24E76A0, redo lsn=0/24E20E0
+2025-10-01 14:51:43.640 AEST [21827] ERROR:  relation "products" does not exist at character 15
+2025-10-01 14:51:43.640 AEST [21827] STATEMENT:  SELECT * FROM products;
+2025-10-01 14:53:48.256 AEST [21800] ERROR:  relation "products" does not exist at character 15
+2025-10-01 14:53:48.256 AEST [21800] STATEMENT:  SELECT * FROM products;
+	
+2025-10-01 14:54:39.992 AEST [16730] LOG:  checkpoint starting: time
+2025-10-01 14:54:49.973 AEST [16730] LOG:  checkpoint complete: wrote 98 buffers (0.6%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=9.966 s, sync=0.009 s, total=9.982 s; sync files=88, longest=0.001 s, average=0.001 s; distance=472 kB, estimate=4062 kB; lsn=0/2558150, redo lsn=0/25580F8
+2025-10-01 14:59:39.973 AEST [16730] LOG:  checkpoint starting: time
+2025-10-01 14:59:41.921 AEST [16730] LOG:  checkpoint complete: wrote 19 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=1.936 s, sync=0.002 s, total=1.951 s; sync files=15, longest=0.001 s, average=0.001 s; distance=62 kB, estimate=3662 kB; lsn=0/2567BD8, redo lsn=0/2567B80
+2025-10-01 15:02:54.290 AEST [21827] ERROR:  syntax error at or near "SELECT" at character 24
+2025-10-01 15:02:54.290 AEST [21827] STATEMENT:  select * from products
+	SELECT * FROM products;
+2025-10-01 15:04:39.911 AEST [16730] LOG:  checkpoint starting: time
+2025-10-01 15:04:40.023 AEST [16730] LOG:  checkpoint complete: wrote 1 buffers (0.0%), wrote 0 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.104 s, sync=0.001 s, total=0.116 s; sync files=1, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=3296 kB; lsn=0/2567E98, redo lsn=0/2567E40
+2025-10-01 15:07:31.777 AEST [22424] ERROR:  syntax error at or near "SELECT" at character 37
+2025-10-01 15:07:31.777 AEST [22424] STATEMENT:  SELECT database InventoryManagement
+	SELECT database InventoryManagement;
+2025-10-01 15:14:39.002 AEST [16730] LOG:  checkpoint starting: time
+2025-10-01 15:14:40.134 AEST [16730] LOG:  checkpoint complete: wrote 11 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=1.123 s, sync=0.001 s, total=1.134 s; sync files=9, longest=0.001 s, average=0.001 s; distance=29 kB, estimate=2969 kB; lsn=0/256F5A0, redo lsn=0/256F510
+2025-10-01 15:19:39.133 AEST [16730] LOG:  checkpoint starting: time
+2025-10-01 15:19:39.248 AEST [16730] LOG:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.108 s, sync=0.001 s, total=0.117 s; sync files=2, longest=0.001 s, average=0.001 s; distance=1 kB, estimate=2672 kB; lsn=0/256F968, redo lsn=0/256F910
+2025-10-01 15:24:03.599 AEST [21800] ERROR:  syntax error at or near "\" at character 1
+2025-10-01 15:24:03.599 AEST [21800] STATEMENT:  \c InventoryManagement
+2025-10-01 15:26:07.991 AEST [22987] ERROR:  duplicate key value violates unique constraint "products_sku_key"
+2025-10-01 15:26:07.991 AEST [22987] DETAIL:  Key (sku)=(SKU-TOOTH-123) already exists.
+2025-10-01 15:26:07.991 AEST [22987] STATEMENT:  INSERT INTO products 
+	(sku, name, description, brand, category, quantity, expiry_date, last_add_date)
+	VALUES
+	('SKU-ABCD-001', 'Chewing Gum Flavored Toothpaste', 'Why spit it out when you can just keep chewing?', 'YOLO Dental', 'Weird Experiments', 42, '2026-01-15', CURRENT_DATE);
+	
+	INSERT INTO products 
+	(sku, name, description, brand, category, quantity, expiry_date, last_add_date)
+	VALUES
+	('SKU-TOOTH-123', 'Colgate Total', 'Fluoride toothpaste for daily use', 'Colgate', 'Toothpaste', 50, '2025-12-31', CURRENT_DATE);
+	
+	
+	SELECT * FROM products;
+2025-10-01 15:26:46.555 AEST [22987] ERROR:  duplicate key value violates unique constraint "products_sku_key"
+2025-10-01 15:26:46.555 AEST [22987] DETAIL:  Key (sku)=(SKU-TOOTH-123) already exists.
+2025-10-01 15:26:46.555 AEST [22987] STATEMENT:  
+	INSERT INTO products 
+	(sku, name, description, brand, category, quantity, expiry_date, last_add_date)
+	VALUES
+	('SKU-ABCD-001', 'Chewing Gum Flavored Toothpaste', 'Why spit it out when you can just keep chewing?', 'YOLO Dental', 'Weird Experiments', 42, '2026-01-15', CURRENT_DATE),
+	
+	('SKU-TOOTH-123', 'Colgate Total', 'Fluoride toothpaste for daily use', 'Colgate', 'Toothpaste', 50, '2025-12-31', CURRENT_DATE),
+	
+	('SKU-BRUSH-001', 'Oral-B Pro 100', 'Electric toothbrush with multiple cleaning modes', 'Oral-B', 'Toothbrush', 30, '2026-03-01', CURRENT_DATE),
+	
+	('SKU-FLOSS-777', 'Glide Dental Floss', 'Mint flavored waxed dental floss', 'Oral-B', 'Floss', 120, '2027-05-20', CURRENT_DATE),
+	
+	('SKU-MWASH-888', 'Listerine Cool Mint', 'Antiseptic mouthwash with mint flavor', 'Listerine', 'Mouthwash', 75, '2026-10-01', CURRENT_DATE),
+	
+	('SKU-KIDS-555', 'Peppa Pig Toothbrush', 'Soft bristles for kids aged 3–6', 'Colgate', 'Toothbrush', 200, '2027-01-10', CURRENT_DATE),
+	
+	('SKU-GEL-909', 'Sensodyne Repair & Protect', 'Toothpaste for sensitive teeth', 'Sensodyne', 'Toothpaste', 65, '2026-04-30', CURRENT_DATE),
+	
+	('SKU-WHITE-333', 'Crest 3D White', 'Whitening toothpaste with fluoride', 'Crest', 'Toothpaste', 80, '2026-06-15', CURRENT_DATE),
+	
+	('SKU-BRUSH-999', 'Philips Sonicare 4100', 'Rechargeable electric toothbrush with pressure sensor', 'Philips', 'Toothbrush', 25, '2026-11-20', CURRENT_DATE),
+	
+	('SKU-GUM-202', 'GUM Soft Picks', 'Interdental brushes for gentle cleaning', 'Sunstar', 'Interdental', 150, '2027-02-05', CURRENT_DATE);
+	
+	SELECT * FROM products;
+2025-10-01 15:26:56.506 AEST [22987] ERROR:  duplicate key value violates unique constraint "products_sku_key"
+2025-10-01 15:26:56.506 AEST [22987] DETAIL:  Key (sku)=(SKU-TOOTH-123) already exists.
+2025-10-01 15:26:56.506 AEST [22987] STATEMENT:  
+	INSERT INTO products 
+	(sku, name, description, brand, category, quantity, expiry_date, last_add_date)
+	VALUES
+	
+	('SKU-TOOTH-123', 'Colgate Total', 'Fluoride toothpaste for daily use', 'Colgate', 'Toothpaste', 50, '2025-12-31', CURRENT_DATE),
+	
+	('SKU-BRUSH-001', 'Oral-B Pro 100', 'Electric toothbrush with multiple cleaning modes', 'Oral-B', 'Toothbrush', 30, '2026-03-01', CURRENT_DATE),
+	
+	('SKU-FLOSS-777', 'Glide Dental Floss', 'Mint flavored waxed dental floss', 'Oral-B', 'Floss', 120, '2027-05-20', CURRENT_DATE),
+	
+	('SKU-MWASH-888', 'Listerine Cool Mint', 'Antiseptic mouthwash with mint flavor', 'Listerine', 'Mouthwash', 75, '2026-10-01', CURRENT_DATE),
+	
+	('SKU-KIDS-555', 'Peppa Pig Toothbrush', 'Soft bristles for kids aged 3–6', 'Colgate', 'Toothbrush', 200, '2027-01-10', CURRENT_DATE),
+	
+	('SKU-GEL-909', 'Sensodyne Repair & Protect', 'Toothpaste for sensitive teeth', 'Sensodyne', 'Toothpaste', 65, '2026-04-30', CURRENT_DATE),
+	
+	('SKU-WHITE-333', 'Crest 3D White', 'Whitening toothpaste with fluoride', 'Crest', 'Toothpaste', 80, '2026-06-15', CURRENT_DATE),
+	
+	('SKU-BRUSH-999', 'Philips Sonicare 4100', 'Rechargeable electric toothbrush with pressure sensor', 'Philips', 'Toothbrush', 25, '2026-11-20', CURRENT_DATE),
+	
+	('SKU-GUM-202', 'GUM Soft Picks', 'Interdental brushes for gentle cleaning', 'Sunstar', 'Interdental', 150, '2027-02-05', CURRENT_DATE);
+	
+	SELECT * FROM products;
+2025-10-01 15:29:39.421 AEST [16730] LOG:  checkpoint starting: time
+2025-10-01 15:29:39.946 AEST [16730] LOG:  checkpoint complete: wrote 5 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.515 s, sync=0.002 s, total=0.527 s; sync files=6, longest=0.001 s, average=0.001 s; distance=9 kB, estimate=2406 kB; lsn=0/2572120, redo lsn=0/25720C8
+2025-10-01 15:34:39.934 AEST [16730] LOG:  checkpoint starting: time
+2025-10-01 15:34:40.050 AEST [16730] LOG:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.106 s, sync=0.001 s, total=0.117 s; sync files=2, longest=0.001 s, average=0.001 s; distance=2 kB, estimate=2166 kB; lsn=0/2572CD0, redo lsn=0/2572C78
+2025-10-01 16:45:03.096 AEST [16730] LOG:  checkpoint starting: time
+2025-10-01 16:45:03.518 AEST [16730] LOG:  checkpoint complete: wrote 4 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.413 s, sync=0.001 s, total=0.423 s; sync files=5, longest=0.001 s, average=0.001 s; distance=4 kB, estimate=1949 kB; lsn=0/2573DB0, redo lsn=0/2573D58
+2025-10-01 17:00:03.483 AEST [16730] LOG:  checkpoint starting: time
+2025-10-01 17:00:03.602 AEST [16730] LOG:  checkpoint complete: wrote 1 buffers (0.0%), wrote 0 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.109 s, sync=0.001 s, total=0.120 s; sync files=1, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=1755 kB; lsn=0/2574100, redo lsn=0/25740A8
+2025-10-01 17:15:03.565 AEST [16730] LOG:  checkpoint starting: time
+2025-10-01 17:15:03.984 AEST [16730] LOG:  checkpoint complete: wrote 4 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.413 s, sync=0.001 s, total=0.421 s; sync files=5, longest=0.001 s, average=0.001 s; distance=4 kB, estimate=1579 kB; lsn=0/25751F8, redo lsn=0/25751A0
+2025-10-01 17:20:56.189 AEST [26069] ERROR:  duplicate key value violates unique constraint "products_sku_key"
+2025-10-01 17:20:56.189 AEST [26069] DETAIL:  Key (sku)=() already exists.
+2025-10-01 17:20:56.189 AEST [26069] STATEMENT:  insert into products (brand,category,description,expiry_date,last_add_date,name,quantity,sku) values ($1,$2,$3,$4,$5,$6,$7,$8)
+	RETURNING *
+2025-10-01 17:20:57.176 AEST [26069] ERROR:  duplicate key value violates unique constraint "products_sku_key"
+2025-10-01 17:20:57.176 AEST [26069] DETAIL:  Key (sku)=() already exists.
+2025-10-01 17:20:57.176 AEST [26069] STATEMENT:  insert into products (brand,category,description,expiry_date,last_add_date,name,quantity,sku) values ($1,$2,$3,$4,$5,$6,$7,$8)
+	RETURNING *
+2025-10-01 17:25:04.100 AEST [16730] LOG:  checkpoint starting: time
+2025-10-01 17:25:04.523 AEST [16730] LOG:  checkpoint complete: wrote 4 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.414 s, sync=0.001 s, total=0.426 s; sync files=5, longest=0.001 s, average=0.001 s; distance=5 kB, estimate=1422 kB; lsn=0/2576618, redo lsn=0/25765C0
+2025-10-01 17:26:26.970 AEST [26069] ERROR:  duplicate key value violates unique constraint "products_sku_key"
+2025-10-01 17:26:26.970 AEST [26069] DETAIL:  Key (sku)=(99) already exists.
+2025-10-01 17:26:26.970 AEST [26069] STATEMENT:  insert into products (brand,category,description,expiry_date,last_add_date,name,quantity,sku) values ($1,$2,$3,$4,$5,$6,$7,$8)
+	RETURNING *
+2025-10-01 17:29:04.356 AEST [26069] ERROR:  duplicate key value violates unique constraint "products_sku_key"
+2025-10-01 17:29:04.356 AEST [26069] DETAIL:  Key (sku)=(99) already exists.
+2025-10-01 17:29:04.356 AEST [26069] STATEMENT:  insert into products (brand,category,description,expiry_date,last_add_date,name,quantity,sku) values ($1,$2,$3,$4,$5,$6,$7,$8)
+	RETURNING *
+2025-10-01 17:30:04.524 AEST [16730] LOG:  checkpoint starting: time
+2025-10-01 17:30:04.956 AEST [16730] LOG:  checkpoint complete: wrote 4 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.413 s, sync=0.003 s, total=0.433 s; sync files=5, longest=0.002 s, average=0.001 s; distance=5 kB, estimate=1280 kB; lsn=0/2577CD0, redo lsn=0/2577C78
+2025-10-01 17:35:04.957 AEST [16730] LOG:  checkpoint starting: time
+2025-10-01 17:35:05.073 AEST [16730] LOG:  checkpoint complete: wrote 1 buffers (0.0%), wrote 0 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.109 s, sync=0.001 s, total=0.119 s; sync files=1, longest=0.001 s, average=0.001 s; distance=3 kB, estimate=1153 kB; lsn=0/2578BB8, redo lsn=0/2578B60
+2025-10-01 17:40:04.074 AEST [16730] LOG:  checkpoint starting: time
+2025-10-01 17:40:04.494 AEST [16730] LOG:  checkpoint complete: wrote 4 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.411 s, sync=0.001 s, total=0.421 s; sync files=5, longest=0.001 s, average=0.001 s; distance=5 kB, estimate=1038 kB; lsn=0/257A398, redo lsn=0/257A340

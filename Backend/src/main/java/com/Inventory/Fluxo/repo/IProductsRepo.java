@@ -8,7 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface IProductsRepo extends JpaRepository<products, Integer> {
-    Optional<products> findBySKU(String SKU);
-
+    Optional<products> findBysku(String SKU);
 
 }

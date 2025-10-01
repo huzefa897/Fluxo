@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/")
+//@RequestMapping("/")
 @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 @RestController
 public class productsController {
@@ -72,11 +72,12 @@ public class productsController {
             return new ResponseEntity<>("Quantity has been Updated", HttpStatus.ACCEPTED);}
         else{return new ResponseEntity<>("Addition Failed as the Prod doesn't exist", HttpStatus.BAD_GATEWAY);}
     }
-//all products
+//Create a product
     @PostMapping("/products")
     public ResponseEntity<?> addProduct(@RequestBody products product){
         try{
-        return ResponseEntity.ok(service.addProduct(product));} catch (Exception e) {
+        return ResponseEntity.ok(service.addProduct(product));
+        } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.I_AM_A_TEAPOT);
         }
     }

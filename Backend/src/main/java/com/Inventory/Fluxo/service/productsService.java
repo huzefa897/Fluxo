@@ -33,7 +33,7 @@ public class productsService {
 
     }
     public products getProductsBySku(String sku) {
-        return repo.findBySKU(sku)
+        return repo.findBysku(sku)
                 .orElseThrow(() -> new RuntimeException("Product not found with SKU: " + sku));
     }
     public void deleteProduct(int id) {

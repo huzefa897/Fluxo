@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getProductById } from '../services/productsServices'
+import { getProductBySKU } from '../services/productsServices'
 import { useParams } from "react-router-dom"
 import Header from './Header'
 export default function ProductCard() {
@@ -7,7 +7,7 @@ export default function ProductCard() {
   const { id } = useParams()
 
   useEffect(() => {
-    getProductById(id)
+    getProductBySKU(id)
       .then((response) => {
         setProduct(response.data)
       })

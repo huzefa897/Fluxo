@@ -1,7 +1,8 @@
 import React, {useEffect,useState} from 'react'
-import { getAllProducts } from '../services/productsServices';
+import { getAllProducts,deleteProduct } from '../services/productsServices';
 import {Link} from 'react-router-dom';
 import Header from './Header';
+
 export const ListProducts = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
@@ -12,6 +13,10 @@ export const ListProducts = () => {
         console.log(error);
     })
   }, []);
+
+  const refresh = () => {
+    window.location.reload();
+  }
   
   return (
     <>
@@ -28,7 +33,7 @@ export const ListProducts = () => {
         <thead>
             <tr>
                 <th>Id</th>
-                <th>SKU</th>
+                <th>sku</th>
                 <th>Name</th>
                 <th>Description</th>
                 <th>Brand</th>
@@ -45,15 +50,16 @@ export const ListProducts = () => {
                     <tr key={product.id}>
                       <td>{product.id}</td>
                       <td>{product.sku}</td>
-                     <td><Link className='btn btn-primary' to={`/ProductCard/${product.id}`}>{product.name}</Link></td>
+                     <td><Link className='text-decoration-none' to={`/ProductCard/${product.sku}`}>{product.name}</Link></td>
                         <td>{product.description}</td>
                         <td>{product.brand}</td>
                         <td>{product.category}</td>
                         <td>{product.quantity}</td>
                         <td>{product.lastAddDate}</td>
                         <td>
-                            {/* <button className="btn btn-primary" onClick={()=>{productCard(product.id)}}>Edit</button> */}
-                            {/* <button className="btn btn-danger">Delete</button> */}
+                            <button className="btn btn-danger" onClick={()=>{
+                                refresh();
+                                deleteProduct(product.sku)}}>Delete</button>
                         </td>
                     </tr>
                 )
