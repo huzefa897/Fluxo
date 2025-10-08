@@ -64,7 +64,7 @@ export const ListProducts = () => {
                                 </Box>
                                 setTimeout(() => {
                                     refresh();
-                                }, 2000);
+                                }, 500);
                                 deleteProduct(product.sku)}}>Delete</button>
                         </td>
                     </tr>
