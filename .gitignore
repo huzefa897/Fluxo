@@ -1,33 +1,93 @@
-HELP.md
-target/
-.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+# ------------------------------
+# Global ignores (Mac + system)
+# ------------------------------
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.swp
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+# Node modules + build artifacts
+Frontend/node_modules/
+Frontend/dist/
+Frontend/.vite/
 
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
+# Environment / sensitive configs
+*.env
+.env.local
+.env.development
+.env.production
+.env.test
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
+# IDE / Editor files
 .vscode/
+.idea/
+*.iml
+
+# OS + temporary
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+*.bak
+*.orig
+
+# ------------------------------
+# Backend (Spring Boot)
+# ------------------------------
+# Maven build output
+Backend/target/
+Backend/.mvn/wrapper/maven-wrapper.jar
+Backend/.mvn/wrapper/maven-wrapper.properties
+
+# Spring Boot runtime files
+Backend/logs/
+Backend/tmp/
+Backend/*.iml
+
+# Database configuration (optional)
+Backend/src/main/resources/application-*.properties
+Backend/src/main/resources/application-*.yml
+
+# If you add Flyway or Liquibase, keep migration SQLs — don’t ignore them
+# Backend/src/main/resources/db/migration/
+
+# ------------------------------
+# PostgreSQL (local data)
+# ------------------------------
+Database/
+pgdata/
+*.sql
+*.dump
+
+# ------------------------------
+# OS/Editor backups
+# ------------------------------
+*~
+*.bak
+*.rej
+*.swo
+*.swp
+*.swn
+
+# ------------------------------
+# Build outputs / installers
+# ------------------------------
+# Windows installer created by jpackage
+Backend/*.exe
+Backend/*.msi
+# Mac/Linux packages if you ever build them
+Backend/*.dmg
+Backend/*.pkg
+Backend/*.deb
+Backend/*.AppImage
+
+# ------------------------------
+# Dependency caches
+# ------------------------------
+Frontend/.npm/
+Frontend/.cache/
+Backend/.gradle/
