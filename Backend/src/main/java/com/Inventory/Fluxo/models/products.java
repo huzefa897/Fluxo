@@ -21,11 +21,15 @@ public class products {
     private String sku;
     private String name;
     private String description;
-    private String brand;
-    private String category;
+    private String brand; //table
+    private String category; //table
     private int quantity;
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date expiryDate;
+    private Date expiryDate; //table
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date lastAddDate;
+    private Date lastAddDate; //table
 }
+
+// OCR Reading Image Processing for BarCode
+
+

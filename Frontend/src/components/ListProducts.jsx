@@ -2,7 +2,8 @@ import React, {useEffect,useState} from 'react'
 import { getAllProducts,deleteProduct } from '../services/productsServices';
 import {Link} from 'react-router-dom';
 import Header from './Header';
-
+import { Box } from '@mui/material';
+import { CircularProgress } from '@mui/material';
 export const ListProducts = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
@@ -58,7 +59,12 @@ export const ListProducts = () => {
                         <td>{product.lastAddDate}</td>
                         <td>
                             <button className="btn btn-danger" onClick={()=>{
-                                refresh();
+                                <Box sx={{ display: 'flex' }}>
+                                <CircularProgress />
+                                </Box>
+                                setTimeout(() => {
+                                    refresh();
+                                }, 2000);
                                 deleteProduct(product.sku)}}>Delete</button>
                         </td>
                     </tr>

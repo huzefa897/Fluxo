@@ -14,7 +14,7 @@ const AddProduct = () => {
     category: "",
     quantity: 0, 
   };
-  const [hidden, setHidden] = useState(true);
+  const [hidden, setHidden] = useState(false);
   const [banner, setBanner] = useState(false);
   const [bannerMessage, setBannerMessage] = useState("");
   const [bannerType, setBannerType] = useState("success");

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const REST_API_BASE_URL = "http://localhost:8080";
+const REST_API_BASE_URL = "http://localhost:8080/api";
 const api = axios.create({
     baseURL: REST_API_BASE_URL,
     headers: { "Content-Type": "application/json" }
@@ -30,6 +30,6 @@ export const removeStock = (sku, quantity) => {
 }
 export const deleteProduct = (sku) => {
    
-    return api.delete(REST_API_BASE_URL+ "/delete/sku/"+sku);
+    return api.delete(REST_API_BASE_URL+ "/sku/"+sku);
     
 }
