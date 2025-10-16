@@ -1,0 +1,11 @@
+[1m
+USING WEB-BASED LOGIN[0m
+
+ Info -> To sign in with credentials on the command line, use 'docker login -u <username>'
+         
+
+Your one-time device confirmation code is: [1mQQRW-VGDQ
+[0m[1mPress ENTER[0m to open your browser or submit your device code here: [4mhttps://login.docker.com/activate
+[0m
+Waiting for authentication in the browser…
+2025/10/16 17:11:05 notifying Desktop of credentials store update: Post "http://ipc/registry/credstore-updated": context deadline exceeded
