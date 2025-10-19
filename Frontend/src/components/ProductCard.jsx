@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { getProductBySKU } from '../services/productsServices'
 import { useParams } from "react-router-dom"
 import Header from './Header'
-export default function ProductCard() {
+
+
+export const ProductCard = () => {
   const [product, setProduct] = useState({})
   const { id } = useParams()
 
@@ -35,3 +37,4 @@ export default function ProductCard() {
     </>
   )
 }
+export default ProductCard;

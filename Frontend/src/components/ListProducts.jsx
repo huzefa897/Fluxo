@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import Header from './Header';
 import { Box } from '@mui/material';
 import { CircularProgress } from '@mui/material';
+import {ProductCard} from './productCard.jsx';
 export const ListProducts = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
