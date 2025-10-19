@@ -52,7 +52,7 @@ export const ListProducts = () => {
                     <tr key={product.id}>
                       <td>{product.id}</td>
                       <td>{product.sku}</td>
-                     <td><Link className='text-decoration-none' to={`/ProductCard/${product.sku}`}>{product.name}</Link></td>
+                     <td><Link className='text-decoration-none' to={`/productCard/${product.sku}`}>{product.name}</Link></td>
                         <td>{product.description}</td>
                         <td>{product.brand}</td>
                         <td>{product.category}</td>
