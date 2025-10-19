@@ -5,17 +5,17 @@ import App from './App.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 // import ListProducts from './components/ListProducts';
-import productCard from './components/productCard.jsx';
+import ProductCard from './components/ProductCard.jsx';
 import ChangeStock from './components/ChangeStock';
 import AddProduct from './components/AddProduct';
 const router = createBrowserRouter([
     {
-        path: '/',
+        path: '/',  
         element: <App />,
     },
     {
-        path: '/productCard/:id',
-        element: <productCard />,
+        path: '/ProductCard/:id',
+        element: <ProductCard />,
     },
     {
       path: '/changeStock',

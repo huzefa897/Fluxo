@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom"
 import Header from './Header'
 
 
-export const productCard = () => {
+export const ProductCard = () => {
   const [product, setProduct] = useState({})
   const { id } = useParams()
 
@@ -37,4 +37,4 @@ export const productCard = () => {
     </>
   )
 }
-export default productCard;
+export default ProductCard;
