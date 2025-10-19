@@ -5,7 +5,7 @@ import App from './App.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 // import ListProducts from './components/ListProducts';
-import ProductCard from './components/productCard.jsx';
+import productCard from './components/productCard.jsx';
 import ChangeStock from './components/ChangeStock';
 import AddProduct from './components/AddProduct';
 const router = createBrowserRouter([
@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     },
     {
         path: '/productCard/:id',
-        element: <ProductCard />,
+        element: <productCard />,
     },
     {
       path: '/changeStock',
