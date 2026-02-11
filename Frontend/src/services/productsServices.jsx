@@ -1,11 +1,10 @@
 import axios from "axios";
 
-const rawBase = import.meta.env.VITE_API_URL; 
-if (!rawBase) {
-  throw new Error("Missing VITE_API_URL. Set it in Netlify env.");
-}
+// Works in local + Docker without requiring Netlify env vars
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+const API_PREFIX = import.meta.env.VITE_API_PREFIX || "";
 
-const API_BASE = `${rawBase}${import.meta.env.VITE_API_PREFIX}`;
+const API_BASE = `${API_URL}${API_PREFIX}`;
 
 const api = axios.create({
   baseURL: API_BASE,

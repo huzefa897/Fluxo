@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Fluxo Setup Wizard</title>
+    <style>
+      :root { color-scheme: dark; }
+      body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; margin: 24px; background: #0b0b0f; color: #e9e9ee; }
+      .card { max-width: 980px; margin: 0 auto; padding: 20px; border: 1px solid #222; border-radius: 14px; background: #101018; box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+      h1 { font-size: 22px; margin: 0 0 6px; }
+      p { opacity: .8; line-height: 1.5; margin: 0 0 16px; }
+      .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      .field { display: flex; flex-direction: column; gap: 6px; }
+      label { font-size: 12px; opacity: .75; }
+      input { padding: 10px 12px; border-radius: 10px; border: 1px solid #2a2a33; background: #0f0f16; color: #fff; }
+      input:focus { outline: none; border-color: #4a4a66; }
+      .row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; align-items: center; }
+      button { padding: 10px 12px; border-radius: 10px; border: 1px solid #2a2a33; background: #171725; color: #fff; cursor: pointer; }
+      button:hover { background: #1d1d2e; }
+      button.danger { border-color: #3a1f1f; background: #221314; }
+      button.danger:hover { background: #2b1718; }
+      .muted { opacity: .75; font-size: 13px; }
+      .dangerText { color: #ffb4b4; }
+      pre { margin: 10px 0 0; padding: 14px; border-radius: 12px; border: 1px solid #222; background: #0a0a10; overflow: auto; }
+      .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+      @media (max-width: 900px) { .grid, .two { grid-template-columns: 1fr; } }
+      .pill { display:inline-block; padding: 2px 8px; border-radius: 999px; background: #1b1b2a; border: 1px solid #2a2a33; font-size: 12px; opacity: .85; }
+      .divider { height: 1px; background: #222; margin: 18px 0; }
+      .status { font-size: 13px; }
+      .status .ok { color: #9dffb4; }
+      .status .bad { color: #ffb4b4; }
+      .check { display:flex; gap:8px; align-items:center; user-select:none; }
+      .check input { width: 16px; height: 16px; }
+    </style>
+  </head>
+
+  <body>
+    <div class="card">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:12px;">
+        <div>
+          <h1>Fluxo Setup Wizard</h1>
+          <p class="muted">
+            Configure Fluxo, then start/stop Docker from here.
+            <span class="pill">Launcher: http://localhost:4000</span>
+          </p>
+        </div>
+        <div class="pill">Local-only</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="row" style="justify-content:space-between;">
+        <div class="status" id="launcherStatus">Checking launcher...</div>
+        <div class="status" id="appStatus">Checking Fluxo...</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <h2 style="font-size:16px; margin:0 0 10px;">1) Configuration</h2>
+
+      <div class="grid">
+        <div class="field">
+          <label>POSTGRES_DB</label>
+          <input id="POSTGRES_DB" value="fluxo" />
+        </div>
+        <div class="field">
+          <label>POSTGRES_USER</label>
+          <input id="POSTGRES_USER" value="fluxo" />
+        </div>
+        <div class="field">
+          <label>POSTGRES_PASSWORD</label>
+          <input id="POSTGRES_PASSWORD" value="fluxo" />
+        </div>
+
+        <div class="field">
+          <label>BACKEND_PORT</label>
+          <input id="BACKEND_PORT" value="8080" />
+        </div>
+        <div class="field">
+          <label>FRONTEND_PORT</label>
+          <input id="FRONTEND_PORT" value="5173" />
+        </div>
+
+        <div class="field">
+          <label>VITE_API_URL</label>
+          <input id="VITE_API_URL" value="http://localhost:8080" />
+        </div>
+        <div class="field">
+          <label>VITE_API_PREFIX</label>
+          <input id="VITE_API_PREFIX" value="" placeholder="e.g. /api (leave blank if none)" />
+        </div>
+        <div class="field">
+          <label>FRONTEND_URL (for backend CORS)</label>
+          <input id="FRONTEND_URL" value="http://localhost:5173" />
+        </div>
+      </div>
+
+      <div class="row">
+        <button id="btnAutofill">Auto-fill URLs from ports</button>
+        <button id="btnDownload">Download .env</button>
+        <button id="btnCopyEnv">Copy .env</button>
+      </div>
+
+      <p class="muted" style="margin-top:10px;">
+        Tip: If ports are already in use, change BACKEND_PORT / FRONTEND_PORT, then click “Auto-fill”.
+      </p>
+
+      <div class="divider"></div>
+
+      <h2 style="font-size:16px; margin:0 0 10px;">2) Control (Docker)</h2>
+
+      <div class="row">
+        <button id="btnStart">Start</button>
+        <button id="btnStop">Stop</button>
+        <button id="btnStatus">Refresh Status</button>
+        <button id="btnLogs">Show Logs</button>
+
+        <label class="check">
+          <input type="checkbox" id="chkRebuild" />
+          <span class="muted">Rebuild images</span>
+        </label>
+
+        <button class="danger" id="btnResetDb">Reset DB</button>
+      </div>
+
+      <pre id="output" style="height: 260px;"></pre>
+      <p class="muted dangerText" id="dangerHint">
+        Reset DB deletes your local database volume (all data). You must confirm.
+      </p>
+
+      <div class="divider"></div>
+
+      <h2 style="font-size:16px; margin:0 0 10px;">3) Links</h2>
+
+      <p class="muted">
+        Frontend: <span id="linkFrontend" class="pill"></span>
+        <br />
+        Backend: <span id="linkBackend" class="pill"></span>
+      </p>
+
+      <div class="two">
+        <div>
+          <div class="muted">Mac / Linux</div>
+          <pre id="cmdUnix"></pre>
+        </div>
+        <div>
+          <div class="muted">Windows PowerShell</div>
+          <pre id="cmdWin"></pre>
+        </div>
+      </div>
+
+      <div class="row">
+        <button id="btnCopyUnix">Copy Mac/Linux commands</button>
+        <button id="btnCopyWin">Copy Windows commands</button>
+      </div>
+    </div>
+
+    <script>
+      // IMPORTANT: Because this page is served by the launcher at http://localhost:4000,
+      // we call the launcher using relative URLs like /start, /stop.
+      const ids = [
+        "POSTGRES_DB","POSTGRES_USER","POSTGRES_PASSWORD",
+        "BACKEND_PORT","FRONTEND_PORT",
+        "VITE_API_URL","VITE_API_PREFIX","FRONTEND_URL"
+      ];
+
+      function getValues() {
+        const v = {};
+        for (const id of ids) v[id] = document.getElementById(id).value.trim();
+        return v;
+      }
+
+      function envText(v) {
+        return `POSTGRES_DB=${v.POSTGRES_DB}
+POSTGRES_USER=${v.POSTGRES_USER}
+POSTGRES_PASSWORD=${v.POSTGRES_PASSWORD}
+
+BACKEND_PORT=${v.BACKEND_PORT}
+FRONTEND_PORT=${v.FRONTEND_PORT}
+
+VITE_API_URL=${v.VITE_API_URL}
+VITE_API_PREFIX=${v.VITE_API_PREFIX}
+FRONTEND_URL=${v.FRONTEND_URL}
+`;
+      }
+
+      function setOutput(text) {
+        const out = document.getElementById("output");
+        out.textContent = text;
+        out.scrollTop = out.scrollHeight;
+      }
+
+      async function copyToClipboard(text) {
+        await navigator.clipboard.writeText(text);
+      }
+
+      function renderCommands() {
+        const v = getValues();
+        const frontend = `http://localhost:${v.FRONTEND_PORT}`;
+        const backend = `http://localhost:${v.BACKEND_PORT}`;
+
+        document.getElementById("linkFrontend").textContent = frontend;
+        document.getElementById("linkBackend").textContent = backend;
+
+        document.getElementById("cmdUnix").textContent =
+`# Start
+docker compose up --build
+
+# Stop
+docker compose down
+
+# Reset DB (wipe local data)
+docker compose down -v`;
+
+        document.getElementById("cmdWin").textContent =
+`# Start
+docker compose up --build
+
+# Stop
+docker compose down
+
+# Reset DB (wipe local data)
+docker compose down -v`;
+      }
+
+      function autoFill() {
+        const backendPort = document.getElementById("BACKEND_PORT").value.trim() || "8080";
+        const frontendPort = document.getElementById("FRONTEND_PORT").value.trim() || "5173";
+        document.getElementById("VITE_API_URL").value = `http://localhost:${backendPort}`;
+        document.getElementById("FRONTEND_URL").value = `http://localhost:${frontendPort}`;
+        renderCommands();
+      }
+
+      // ---- Launcher API calls (relative) ----
+      async function callLauncher(path, method, body, headers = {}) {
+        const res = await fetch(path, {
+          method,
+          headers: { "Content-Type": "application/json", ...headers },
+          body: body ? JSON.stringify(body) : undefined
+        });
+        const text = await res.text();
+        setOutput(text);
+        return { ok: res.ok, text };
+      }
+
+      async function checkLauncherHealth() {
+        try {
+          const res = await fetch("/health");
+          if (!res.ok) throw new Error("not ok");
+          document.getElementById("launcherStatus").innerHTML =
+            `Launcher: <span class="ok">Running ✅</span>`;
+        } catch {
+          document.getElementById("launcherStatus").innerHTML =
+            `Launcher: <span class="bad">Not detected ❌</span> (Run: <span class="pill">cd launcher && npm start</span>)`;
+        }
+      }
+
+      async function refreshStatus() {
+        try {
+          const res = await fetch("/status");
+          if (!res.ok) throw new Error("status failed");
+          const data = await res.json();
+          document.getElementById("appStatus").innerHTML =
+            `Fluxo: ${data.running ? '<span class="ok">Running ✅</span>' : '<span class="bad">Stopped ⛔</span>'}`;
+        } catch {
+          document.getElementById("appStatus").innerHTML =
+            `Fluxo: <span class="bad">Unknown</span>`;
+        }
+      }
+
+      async function startDocker() {
+        const rebuild = document.getElementById("chkRebuild").checked;
+        setOutput("Starting...\n");
+        await callLauncher(rebuild ? "/start?rebuild=1" : "/start", "POST", getValues());
+        await refreshStatus();
+      }
+
+      async function stopDocker() {
+        setOutput("Stopping...\n");
+        await callLauncher("/stop", "POST");
+        await refreshStatus();
+      }
+
+      async function showLogs() {
+        setOutput("Fetching logs...\n");
+        const res = await fetch("/logs");
+        const text = await res.text();
+        setOutput(text);
+      }
+
+      async function resetDb() {
+        const ok = confirm("This will DELETE your local database volume (ALL DATA). Continue?");
+        if (!ok) return;
+
+        setOutput("Resetting DB...\n");
+        await callLauncher("/reset-db", "POST", null, { "X-CONFIRM-RESET": "YES" });
+        await refreshStatus();
+      }
+
+      // ---- Existing buttons ----
+      document.getElementById("btnAutofill").onclick = autoFill;
+
+      document.getElementById("btnDownload").onclick = () => {
+        const v = getValues();
+        const blob = new Blob([envText(v)], { type: "text/plain" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = ".env";
+        a.click();
+        URL.revokeObjectURL(a.href);
+      };
+
+      document.getElementById("btnCopyEnv").onclick = async () => {
+        await copyToClipboard(envText(getValues()));
+        alert("Copied .env to clipboard ✅");
+      };
+
+      document.getElementById("btnCopyUnix").onclick = async () => {
+        await copyToClipboard(document.getElementById("cmdUnix").textContent);
+        alert("Copied Mac/Linux commands ✅");
+      };
+
+      document.getElementById("btnCopyWin").onclick = async () => {
+        await copyToClipboard(document.getElementById("cmdWin").textContent);
+        alert("Copied Windows commands ✅");
+      };
+
+      // ---- New control buttons ----
+      document.getElementById("btnStart").onclick = startDocker;
+      document.getElementById("btnStop").onclick = stopDocker;
+      document.getElementById("btnStatus").onclick = async () => { await refreshStatus(); setOutput("Status refreshed.\n"); };
+      document.getElementById("btnLogs").onclick = showLogs;
+      document.getElementById("btnResetDb").onclick = resetDb;
+
+      // Init
+      renderCommands();
+      checkLauncherHealth();
+      refreshStatus();
+
+      // refresh status every 10s
+      setInterval(refreshStatus, 10000);
+    </script>
+  </body>
+</html>

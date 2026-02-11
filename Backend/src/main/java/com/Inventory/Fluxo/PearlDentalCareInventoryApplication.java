@@ -3,11 +3,9 @@ package com.Inventory.Fluxo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.Inventory")
 public class PearlDentalCareInventoryApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(PearlDentalCareInventoryApplication.class, args);
-	}
-
+  public static void main(String[] args) {
+    SpringApplication.run(PearlDentalCareInventoryApplication.class, args);	
+  }
 }

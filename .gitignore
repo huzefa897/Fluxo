@@ -91,3 +91,5 @@ Backend/*.AppImage
 Frontend/.npm/
 Frontend/.cache/
 Backend/.gradle/
+
+.fake

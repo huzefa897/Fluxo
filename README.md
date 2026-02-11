@@ -1,155 +1,212 @@
-# 📦 Fluxo — Inventory Management System
+# Fluxo (Pearl Dental Care Inventory) — Run Locally with Docker
 
-Fluxo is a **full-stack inventory management application** built with **Spring Boot (Java)** for the backend and **React.js** for the frontend.
+Fluxo is a simple inventory management app with:
 
-It allows users to manage products, track stock levels, and update quantities in real-time.
+- **Frontend** (React)
+- **Backend** (Spring Boot)
+- **Database** (PostgreSQL)
 
----
-
-## ✨ Features
-
-- ➕ Add new products with **SKU, name, brand, description, category, expiry date, and quantity**
-- 🔍 Search and fetch products by **ID or SKU**
-- 📊 Track and update **stock levels** (add/remove quantities)
-- ⏱️ Automatically updates **last added date**
-- ⚡ REST API backend with **Spring Boot** and **JPA/Hibernate**
-- 🗄️ Database support with **PostgreSQL** (switchable from H2 for testing)
-- 🎨 Frontend built with **React.js** + **Material UI** for a modern UI
+This repo is set up so anyone can run the full app locally on **any machine** using Docker.
 
 ---
 
-## 🏗️ Tech Stack
+## Prerequisites
 
-**Frontend**
+Install:
 
-- React.js
-- Material UI (MUI)
-- Axios (API calls)
-- TailwindCSS (styling helpers)
+- **Docker Desktop** (includes Docker Compose)
 
-**Backend**
-
-- Spring Boot (Java 21+)
-- Spring Data JPA / Hibernate
-- REST API architecture
-- PostgreSQL (default DB)
-- H2 (for quick local testing)
-
----
-
-## ⚙️ Setup & Installation
-
-### 1. Clone the repo
+Verify:
 
 ```bash
-git clone https://github.com/huzefa897/fluxo.git
-cd fluxo
-
+docker --version
+docker compose version
 ```
 
-### 2. Backend (Spring Boot)
+---
+
+## Quick Start (Recommended)
+
+### 1) Clone the repo
 
 ```bash
-cd Backend
-./mvnw spring-boot:run
-
+gitclone https://github.com/huzefa897/Fluxo.gitcd Fluxo
 ```
 
-Backend runs at: `http://localhost:8080`
+### 2) Create env file
 
-Make sure to configure your DB in `application.properties`:
+Create a `.env` file in the **repo root** (same folder as `docker-compose.yml`).
 
-```
-spring.datasource.url=jdbc:postgresql://localhost:5432/fluxo
-spring.datasource.username=youruser
-spring.datasource.password=yourpassword
-spring.jpa.hibernate.ddl-auto=update
-
-```
-
-### 3. Frontend (React)
+You can copy from an example if present:
 
 ```bash
-cd Frontend
-npm install
-npm run dev
-
+cp .env.example .env
 ```
 
-Frontend runs at: `http://localhost:5173`
+If you don’t have an example yet, create `.env` manually with:
+
+```
+POSTGRES_DB=fluxo
+POSTGRES_USER=fluxo
+POSTGRES_PASSWORD=fluxo
+
+BACKEND_PORT=8080
+FRONTEND_PORT=5173
+
+VITE_API_URL=http://localhost:8080
+VITE_API_PREFIX=
+FRONTEND_URL=http://localhost:5173
+```
+
+> If your backend routes are under `/api`, set:
+> 
+> 
+> `VITE_API_PREFIX=/api`
+> 
 
 ---
 
-## 📡 API Endpoints
+### 3) Build and run everything
 
-### Products
+```bash
+docker compose up --build
+```
 
-| Method | Endpoint | Description |
-| --- | --- | --- |
-| `GET` | `/api/products` | Get all products |
-| `GET` | `/api/products/{id}` | Get product by ID |
-| `GET` | `/api/products/sku/{sku}` | Get product by SKU |
-| `POST` | `/api/products` | Create a new product |
-| `PUT` | `/api/products/{id}/add/{quantity}` | Increase stock quantity by ID |
-| `PUT` | `/api/products/{id}/remove/{quantity}` | Decrease stock quantity by ID |
-| `PUT` | `/api/products/sku/{sku}/add/{qty}` | Increase stock by SKU |
-| `PUT` | `/api/products/sku/{sku}/remove/{qty}` | Decrease stock by SKU |
+Open:
 
----
+- **Frontend:** http://localhost:5173
+- **Backend:** http://localhost:8080
 
-## 🗃️ Database Schema (PostgreSQL)
+To stop:
 
-```sql
-CREATE TABLE products (
-    id SERIAL PRIMARY KEY,
-    sku VARCHAR(100) NOT NULL UNIQUE,
-    name VARCHAR(255) NOT NULL,
-    description TEXT,
-    brand VARCHAR(100),
-    category VARCHAR(100),
-    quantity INT NOT NULL DEFAULT 0,
-    expiry_date DATE,
-    last_add_date DATE
-);
-
+```bash
+docker compose down
 ```
 
 ---
 
-## 🚀 Future Enhancements
+## Data Persistence (Local Database Storage)
 
-- 🔐 User authentication & role-based access (admin/staff)
-- 📑 Reports & analytics dashboard (low stock, expiry alerts)
-- 📱 Mobile-friendly responsive design
-- ⏰ Automatic reminders for expiring products
-- ☁️ Docker & Kubernetes deployment
+Your database is stored locally using a Docker volume, so data stays even after restart.
 
----
+- Stop containers (keeps data):
 
-## 🤝 Contributing
+```bash
+docker compose down
+```
 
-1. Fork the repo
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+- Stop containers and **wipe database**:
+
+```bash
+docker compose down -v
+```
 
 ---
 
-## 📜 License
+## Useful Commands
 
-This project is licensed under the MIT License — see the [LICENSE](https://chatgpt.com/g/g-p-686f3132762881919e6066d671f4e13a-codemaxing/c/LICENSE) file for details.
+### View running containers
+
+```bash
+docker ps
+```
+
+### View backend logs
+
+```bash
+docker logs -f fluxo_backend
+```
+
+### View frontend logs
+
+```bash
+docker logs -f fluxo_frontend
+```
+
+### View database logs
+
+```bash
+docker logs -f fluxo_db
+```
+
+### Rebuild everything from scratch
+
+```bash
+docker compose down -v
+docker compose up --build
+```
 
 ---
 
-## 🙌 Acknowledgements
+## Troubleshooting
 
-- Inspired by real-world **clinic inventory workflows**
-- Built as part of the **CodeMaxing project** to practice React + Spring Boot + PostgreSQL
-- Thanks to [Material UI](https://mui.com/) and [Spring Boot](https://spring.io/projects/spring-boot)
+### 1) Frontend shows API “Not Found” (404)
+
+This usually means the frontend is calling the wrong API base URL.
+
+Check your `.env`:
+
+- `VITE_API_URL` should be:
+    - `http://localhost:8080`
+- If your backend endpoints are prefixed (example `/api/products`), set:
+    - `VITE_API_PREFIX=/api`
+
+Then rebuild:
+
+```bash
+docker compose up --build
+```
 
 ---
 
-✨ Fluxo makes stock management simple, scalable, and reliable.
+### 2) CORS error in browser
+
+Backend must allow requests from the frontend origin:
+
+- `http://localhost:5173`
+
+Make sure `.env` contains:
+
+```
+FRONTEND_URL=http://localhost:5173
+```
+
+---
+
+### 3) Port already in use
+
+If you already have something running on 8080 or 5173, change ports in `.env`:
+
+```
+BACKEND_PORT=8081
+FRONTEND_PORT=5174
+VITE_API_URL=http://localhost:8081
+FRONTEND_URL=http://localhost:5174
+```
+
+Then run:
+
+```bash
+docker compose up --build
+```
+
+---
+
+## Project Structure (High Level)
+
+```
+Fluxo/
+  Backend/# Spring Boot API
+  Frontend/# React UI
+  docker-compose.yml
+  .env / .env.example
+```
+
+---
+
+## Notes
+
+- This setup is meant for **local** usage on any machine via Docker.
+- Database runs locally and stores data locally using Docker volumes.
 
 ---

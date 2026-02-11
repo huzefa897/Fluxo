@@ -1,0 +1,40 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: fluxo_db
+    environment:
+      POSTGRES_DB: fluxo
+      POSTGRES_USER: fluxo
+      POSTGRES_PASSWORD: fluxo
+    volumes:
+      - fluxo_pgdata:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./Backend
+    container_name: fluxo_backend
+    depends_on:
+      - db
+    environment:
+      DATASOURCE_URL: jdbc:postgresql://db:5432/fluxo
+      DATASOURCE_USER: fluxo
+      DATASOURCE_PASSWORD: fluxo
+      FRONTEND_URL: http://localhost:5173
+      PORT: 8080
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build:
+      context: ./Frontend
+      args:
+        VITE_API_URL: http://localhost:8080
+        VITE_API_PREFIX: "/api"
+    container_name: fluxo_frontend
+    depends_on:
+      - backend
+    ports:
+      - "5173:80"
+
+volumes:
+  fluxo_pgdata:
