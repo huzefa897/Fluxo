@@ -3,48 +3,42 @@ services:
     image: postgres:16-alpine
     container_name: fluxo_db
     environment:
-      POSTGRES_DB: fluxo
-      POSTGRES_USER: fluxo
-      POSTGRES_PASSWORD: fluxo
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
-      - "5433:5432"
+      - "${DB_HOST_PORT}:5432"
     volumes:
       - fluxo_pgdata:/var/lib/postgresql/data
     restart: unless-stopped
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U fluxo -d fluxo"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 5s
       timeout: 3s
       retries: 30
 
   backend:
-    build:
-      context: ./Backend
+    image: ghcr.io/huzefa897/fluxo-backend:${APP_VERSION}
     container_name: fluxo_backend
     depends_on:
       db:
         condition: service_healthy
     environment:
-      DATASOURCE_URL: jdbc:postgresql://db:5432/fluxo
-      DATASOURCE_USER: fluxo
-      DATASOURCE_PASSWORD: fluxo
-      FRONTEND_URL: http://localhost:5173
+      DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB}
+      DATASOURCE_USER: ${POSTGRES_USER}
+      DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
       PORT: 8080
     ports:
-      - "8080:8080"
+      - "${BACKEND_HOST_PORT}:8080"
     restart: unless-stopped
 
   frontend:
-    build:
-      context: ./Frontend
-      args:
-        VITE_API_URL: http://localhost:8080
-        VITE_API_PREFIX: "/api"
+    image: ghcr.io/huzefa897/fluxo-frontend:${APP_VERSION}
     container_name: fluxo_frontend
     depends_on:
       - backend
     ports:
-      - "5173:80"
+      - "${FRONTEND_HOST_PORT}:80"
     restart: unless-stopped
 
 volumes:
